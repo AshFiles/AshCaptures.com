@@ -69,18 +69,26 @@
         }
 
         .hero {
-            height: 100vh;
+            padding-top: 56px; /* Adjust based on navbar height */
+            width: 100%;
             position: relative;
+            aspect-ratio: 4/3; /* This enforces 4:3 ratio */
+            max-height: calc(100vh - 56px); /* Ensures it doesn't exceed viewport height */
+            margin: 0 auto; /* Centers the hero section */
         }
+
+
         .hero-slide {
             height: 100%;
             width: 100%;
             position: absolute;
-            background-size: cover;
+            background-size: contain; /* Change from 'cover' to 'contain' if needed */
             background-position: center;
+            background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 0.5s;
         }
+
         .hero-slide.active {
             opacity: 1;
         }
@@ -88,15 +96,15 @@
             position: absolute;
             z-index: 10;
             top: 50%;
-            left: 0;
-            right: 0;
+            left: 0;  /* Change this */
+            right: 0; /* Add this */
             transform: translateY(-50%);
             text-align: center;
-            margin: auto;
-            width: 90%;
-            max-width: 800px;
-            margin-top: -40px; /* Add this line to shift up */
+            margin: 0 auto; /* Add this */
         }
+
+
+
 
 
 
@@ -219,9 +227,10 @@
         .social-icon {
             font-size: 3rem;
             color: var(--dark-text);
-            transition: color 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .social-icon:hover {
+            transform: translateY(-3px);
             color: var(--primary-color);
         }
         .footer-text {
@@ -250,9 +259,10 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/home.png')"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/slider2.jpg')"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/slider3.jpg')"></div>
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/butterfly.jpg')"></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/lotus.jpg')"></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/sidewalk.jpg')"></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/lowangle.jpg')"></div>
         <i class="fas fa-chevron-left slide-arrow slide-prev"></i>
         <i class="fas fa-chevron-right slide-arrow slide-next"></i>
         <div class="hero-content" data-aos="fade-up">
@@ -265,40 +275,20 @@
     <section id="photos" class="section">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">Photo Gallery</h2>
-            <div class="row gallery g-2">
-                <div class="col-md-4 photo-item" data-aos="fade-up">
-                    <img src="images/img_1.jpg" alt="Photo 1" class="img-fluid">
-                </div>
-                <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="100">
-                    <img src="images/img_2.jpg" alt="Photo 2" class="img-fluid">
-                </div>
-                <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="200">
-                    <img src="images/img_3.jpg" alt="Photo 3" class="img-fluid">
-                </div>
-
-                
-
-
-                <!-- Add more photo items as needed -->
-            </div>
-
-
-
-        <div class="row gallery g-2">
-                        
-
-                        <div class="col-md-4 photo-item" data-aos="fade-up">
-                            <img src="images/img_4.jpg" alt="Photo 1" class="img-fluid">
-                        </div>
-                        <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="100">
-                            <img src="images/img_5.jpg" alt="Photo 2" class="img-fluid">
-                        </div>
-                        <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="200">
-                            <img src="images/img_6.jpg" alt="Photo 3" class="img-fluid">
-                        </div>
-                        <!-- Add more photo items as needed -->
+                <div class="row gallery g-2">
+                    <div class="col-md-4 photo-item" data-aos="fade-up">
+                        <img src="images/img_1.jpg" alt="Photo 1" class="img-fluid">
                     </div>
-            </div>
+                    <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="100">
+                        <img src="images/img_2.jpg" alt="Photo 2" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="200">
+                        <img src="images/img_3.jpg" alt="Photo 3" class="img-fluid">
+                    </div>
+                    <!-- Add more photo items as needed -->
+                </div>
+
+        </div>
     </section>
 
     <section id="about" class="section">
