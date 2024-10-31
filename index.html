@@ -136,16 +136,23 @@
             cursor: pointer;
             aspect-ratio: 4/3;
             padding: 0; /* Remove padding */
-            margin-bottom: 0; /* Remove bottom margin */
+            margin: 0; /* Remove bottom margin */
         }
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            display: block;
         }
+        .gallery .row {
+            --bs-gutter-x: 0;
+            --bs-gutter-y: 0;
+            margin: 0;
+        }
+
         .gallery .col-md-4 {
-            padding: 0.2rem; /* Adjust this value to increase/decrease spacing */
+            padding: 2px; /* Minimal padding between images */
         }
         .photo-item:hover img {
             transform: scale(1.05);
@@ -272,24 +279,60 @@
         </div>
     </section>
 
-    <section id="photos" class="section">
+    <section id="photos" class="section gallery">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">Photo Gallery</h2>
-                <div class="row gallery g-2">
-                    <div class="col-md-4 photo-item" data-aos="fade-up">
-                        <img src="images/img_1.jpg" alt="Photo 1" class="img-fluid">
+            <div class="row g-4"> <!-- Changed from g-2 to g-4 for more control -->
+                <!-- First Row -->
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="photo-item">
+                        <img src="images/butterfly.jpg" alt="Photo 1" class="img-fluid">
                     </div>
-                    <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="100">
-                        <img src="images/img_2.jpg" alt="Photo 2" class="img-fluid">
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="photo-item">
+                        <img src="images/lotus.jpg" alt="Photo 2" class="img-fluid">
                     </div>
-                    <div class="col-md-4 photo-item" data-aos="fade-up" data-aos-delay="200">
-                        <img src="images/img_3.jpg" alt="Photo 3" class="img-fluid">
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="photo-item">
+                        <img src="images/tiger_butterfly.jpg" alt="Photo 3" class="img-fluid">
                     </div>
-                    <!-- Add more photo items as needed -->
                 </div>
 
+                <!-- Second Row -->
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="photo-item">
+                        <img src="images/huge_statue.jpg" alt="Photo 4" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="photo-item">
+                        <img src="images/sidewalk.jpg" alt="Photo 5" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="photo-item">
+                        <img src="images/meditating.jpg" alt="Photo 6" class="img-fluid">
+                    </div>
+                </div>
+                
+                <!-- Third Row -->
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="photo-item">
+                        <img src="images/lowangle.jpg" alt="Photo 7" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="photo-item">
+                        <img src="images/bench.jpg" alt="Photo 8" class="img-fluid">
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
+
 
     <section id="about" class="section">
         <div class="container">
