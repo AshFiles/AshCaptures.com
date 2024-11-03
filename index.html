@@ -71,6 +71,43 @@
             }
         }
 
+        @media (max-width: 576px) {
+            /* Navbar styles */
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 0.3rem !important;
+            }
+            .navbar-nav .social-icon {
+                font-size: 1rem;
+                padding: 0.3rem;
+            }
+
+            /* Email styles */
+            .email-large {
+                font-size: 1.2rem;
+                word-break: break-all;
+            }
+
+            /* Slideshow arrow styles */
+            .slide-arrow {
+                font-size: 1.2rem;
+                padding: 0.5rem;
+            }
+            .slide-prev { left: 5px; }
+            .slide-next { right: 5px; }
+            /* styles for the About section image */
+            #about .col-md-6 {
+                text-align: center;
+            }
+            #about img {
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
         .hero {
             padding-top: 56px; /* Adjust based on navbar height */
             width: 100%;
@@ -98,7 +135,7 @@
         .hero-content {
             position: absolute;
             z-index: 10;
-            top: 50%;
+            top: 59%;
             left: 0;  /* Change this */
             right: 0; /* Add this */
             transform: translateY(-50%);
@@ -261,8 +298,9 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
     
-                    <li class="nav-item" data-aos="fade-left"><a href="#" class="nav-link social-icon"><i class="fab fa-instagram"></i></a></li>
                     <li class="nav-item" data-aos="fade-left"><a href="#" class="nav-link social-icon"><i class="fab fa-youtube"></i></a></li>
+                    <li class="nav-item" data-aos="fade-left"><a href="#" class="nav-link social-icon"><i class="fab fa-instagram"></i></a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -364,8 +402,10 @@
                 <div class="col-md-8 text-center">
                     <div class="email-large mb-4" data-aos="fade-up">ashcaptures@gmail.com</div>
                     <div class="social-icons" data-aos="fade-up" data-aos-delay="100">
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+
                         <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        
                     </div>
                 </div>
             </div>
