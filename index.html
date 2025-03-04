@@ -135,13 +135,23 @@
         .hero-content {
             position: absolute;
             z-index: 10;
-            top: 59%;
-            left: 0;  /* Change this */
-            right: 0; /* Add this */
-            transform: translateY(-50%);
-            text-align: center;
-            margin: 0 auto; /* Add this */
+            bottom: 30px; /* Adjust this value to move text lower (increase to move down) */
+            left: 50px;
+            transform: none;
+            text-align: left;
+            margin: 0;
         }
+
+        /* Add these styles to reduce the size of "Welcome to Ash Captures" */
+.hero-content h1.display-4 {
+    font-size: 2.5rem; /* Adjust this value to make text smaller or larger */
+    margin-bottom: 0.5rem; /* Reduce space between heading and paragraph */
+}
+
+
+.hero-content p.lead.mb-5 {
+    margin-bottom: 1rem !important; /* This will override Bootstrap's mb-5 */
+}
 
 
 
@@ -307,10 +317,11 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/butterfly.jpg')"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/lotus.jpg')"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/sidewalk.jpg')"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/lowangle.jpg')"></div>
+        <div class="hero-slide active" style="background-image: url('images/butterfly.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/lotus.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/sidewalk.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/lowangle.jpg')"></div>
+
         <i class="fas fa-chevron-left slide-arrow slide-prev"></i>
         <i class="fas fa-chevron-right slide-arrow slide-next"></i>
         <div class="hero-content" data-aos="fade-up">
@@ -381,18 +392,18 @@
                         <img src="images/river_neon_me.jpg" alt="Photo 10" class="img-fluid">
                     </div>
                 </div>
-<!--
+
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="photo-item">
-                        <img src="images/bridge_walk.jpg" alt="Photo 8" class="img-fluid">
+                        <img src="images/raj_bhavan.jpg" alt="Photo 11" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="photo-item">
-                        <img src="images/bench.jpg" alt="Photo 9" class="img-fluid">
+                        <img src="images/mask.jpg" alt="Photo 12" class="img-fluid">
                     </div>
                 </div>
--->
+
                 
             </div>
         </div>
@@ -403,7 +414,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6" data-aos="fade-right">
-                    <img src="images/dp.png" alt="Ash" class="img-fluid rounded-circle mb-4" style="max-width: 80%;">
+                    <img src="images/dp.jpg" alt="Ash" class="img-fluid rounded-circle mb-4" style="max-width: 80%;">
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
                     <h2 class="mb-4">About Me</h2>
