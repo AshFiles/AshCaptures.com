@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ash Captures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        :root {
+            --primary-color: #4B0082;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --dark-text: #e0e0e0;
+        }
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            font-family: 'Arial', sans-serif;
+        }
+        
+
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .navbar-toggler {
+            background-color: white;
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--dark-text) !important;
+        }
+        .navbar-nav {
+            align-items: center;
+        }
+        .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-separator {
+            border-left: 1px solid var(--dark-text);
+            height: 20px;
+            margin: 0 15px;
+        }
+        .navbar-nav .social-icon {
+            font-size: 1.25rem;
+            padding: 0.5rem;
+        }
+        @media (max-width: 991px) {
+            .navbar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .email-large {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .email-large {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* Navbar styles */
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 0.3rem !important;
+            }
+            .navbar-nav .social-icon {
+                font-size: 1rem;
+                padding: 0.3rem;
+            }
+
+            /* Email styles */
+            .email-large {
+                font-size: 1.2rem;
+                word-break: break-all;
+            }
+
+            /* Slideshow arrow styles */
+            .slide-arrow {
+                font-size: 1.2rem;
+                padding: 0.5rem;
+            }
+            .slide-prev { left: 5px; }
+            .slide-next { right: 5px; }
+            /* styles for the About section image */
+            #about .col-md-6 {
+                text-align: center;
+            }
+            #about img {
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        .hero {
+            padding-top: 56px; /* Adjust based on navbar height */
+            width: 100%;
+            position: relative;
+            aspect-ratio: 4/3; /* This enforces 4:3 ratio */
+            max-height: calc(100vh - 56px); /* Ensures it doesn't exceed viewport height */
+            margin: 0 auto; /* Centers the hero section */
+        }
+
+
+        .hero-slide {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-size: contain; /* Change from 'cover' to 'contain' if needed */
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: absolute;
+            z-index: 10;
+            bottom: 10px; 
+            top: 40vw;
+            left: 30px;
+            transform: none;
+            text-align: left;
+            margin: 0;
+            
+        }
+
+        /* Add these styles to reduce the size of "Welcome to Ash Captures" */
+        .hero-content h1.display-4 {
+            font-size: 2rem; /* Adjust this value to make text smaller or larger */
+            margin-bottom: 0.3rem; /* Reduce space between heading and paragraph */
+            
+        }
+
+
+        .hero-content p.lead.mb-5 {
+            margin-bottom: 1rem !important; /* This will override Bootstrap's mb-5 */
+        }
+
+
+
+
+
+
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            padding: 1rem;
+            background: rgba(0,0,0,0.5);
+        }
+        .slide-prev { left: 20px; }
+        .slide-next { right: 20px; }
+        .section {
+            padding: 5rem 0;
+        }
+        .section:nth-child(even) {
+            background-color: var(--dark-bg);
+        }
+        .section:nth-child(odd) {
+            background-color: var(--darker-bg);
+        }
+        .photo-item {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove bottom margin */
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .gallery .row {
+            --bs-gutter-x: 0;
+            --bs-gutter-y: 0;
+            margin: 0;
+        }
+
+        .gallery .col-md-4 {
+            padding: 2px; /* Minimal padding between images */
+        }
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 50px;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .lightbox-prev {
+            left: 1rem;
+        }
+        .lightbox-next {
+            right: 1rem;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .lightbox-close:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .email-large {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .social-icon {
+            font-size: 3rem;
+            color: var(--dark-text);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+        .footer-text {
+            color: #808080; /* Dull gray color */
+            font-size: 0.9rem; /* Slightly smaller font size */
+        }
+
+        .gallery-section {
+            background-color: #0f0f0f;
+            border: 1px solid #222224;
+            padding: 20px;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }       
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand fixed-top">
+        <div class="container">
+            <a class="navbar-brand" data-aos="fade-right" href="#">Ash Captures</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#photos">Photos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+    
+                    <li class="nav-item" data-aos="fade-left"><a href="#" class="nav-link social-icon"><i class="fab fa-youtube"></i></a></li>
+                    <li class="nav-item" data-aos="fade-left"><a href="https://www.instagram.com/ashcapturesgallery/" class="nav-link social-icon"><i class="fab fa-instagram"></i></a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-slide active" style="background-image: url('images/butterfly.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/lotus.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/sidewalk.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('images/lowangle.jpg')"></div>
+
+        <i class="fas fa-chevron-left slide-arrow slide-prev"></i>
+        <i class="fas fa-chevron-right slide-arrow slide-next"></i>
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="display-4 text-white mb-4">Welcome to Ash Captures</h1>
+            <p class="lead text-white mb-5">Capturing moments, creating memories</p>
+            <a href="#contact" class="btn btn-primary btn-lg">Contact Me</a>
+        </div>
+    </section>
+
+    <section id="photos" class="section gallery">
+  <div class="container">
+    <h2 class="text-center mb-5" data-aos="fade-up">Photo Gallery</h2>
+
+
+        <!-- People -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">People</h3>
+          <div class="row g-4 mt-3">
+
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/red_pillar.jpg" alt="click to expand" class="img-fluid">
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/meditating.jpg" alt="click to expand" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/with_statue.jpg" alt="click to expand" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/with_kid.jpg" alt="click to expand" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- Add more portrait/person-focused images here -->
+          </div>
+        </div>
+
+        <!-- Nature -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">Nature</h3>
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/butterfly.jpg" alt="Butterfly" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-md-4" data-aos-delay="100">
+              <div class="photo-item">
+                <img src="images/lotus.jpg" alt="Lotus" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-md-4" data-aos-delay="200">
+              <div class="photo-item">
+                <img src="images/tiger_butterfly.jpg" alt="Tiger Butterfly" class="img-fluid">
+              </div>
+            </div>
+            <!-- Add more nature images here -->
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">Architecture</h3>
+          <div class="row g-4 mt-3">
+
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/lowangle.jpg" alt="Sidewalk" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4" data-aos-delay="100">
+              <div class="photo-item">
+                <img src="images/raj_bhavan.jpg" alt="Bench" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4" data-aos-delay="200">
+              <div class="photo-item">
+                <img src="images/bridge_walk.jpg" alt="Bridge Walk" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4" data-aos-delay="200">
+              <div class="photo-item">
+                <img src="images/templetop.jpg" alt="Bridge Walk" class="img-fluid">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Travel -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">Travel</h3>
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/huge_statue.jpg" alt="Huge Statue" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-md-4" data-aos-delay="100">
+              <div class="photo-item">
+                <img src="images/sidewalk.jpg" alt="Raj Bhavan" class="img-fluid">
+              </div>
+            </div>
+            <!-- Add more travel images here -->
+          </div>
+        </div>
+
+        <!-- Abstract  -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">Abstract</h3>
+          <div class="row g-4 mt-3">
+
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/bench.jpg" alt="Low Angle" class="img-fluid">
+              </div>
+            </div>
+
+            <div class="col-md-4" data-aos-delay="100">
+              <div class="photo-item">
+                <img src="images/mask.jpg" alt="Mask" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- Add more abstract images here -->
+          </div>
+        </div>
+
+        <!-- Events -->
+        <div class="gallery-section" data-aos="fade-up">
+          <h3 style="text-align: left;">Events</h3>
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="photo-item">
+                <img src="images/river_neon_me.jpg" alt="River Neon" class="img-fluid">
+              </div>
+            </div>
+            <!-- Add more events/lifestyle images here -->
+          </div>
+        </div>
+          </div>
+</section>
+
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6" data-aos="fade-right">
+                    <img src="images/dp.jpg" alt="Ash" class="img-fluid rounded-circle mb-4" style="max-width: 80%;">
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h2 class="mb-4">About Me</h2>
+                    <p>Hi, I'm Ash, Photography quickly grew into something I truly enjoy and became a way of appreciating the world around me.</p>
+                    <p>Over time, I’ve learned that capturing the moment requires more than just pressing a button—it takes a keen eye for detail, continuous learning, patience, and practice. Each capture is a way to connect the past with the present, and to see how these moments shape the future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <div class="email-large mb-4" data-aos="fade-up">HelloAshCaptures@gmail.com</div>
+                    <div class="social-icons" data-aos="fade-up" data-aos-delay="100">
+
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/ashcapturesgallery/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center py-4">
+        <p class="footer-text">
+            &copy; <span id="current-year"></span> Ash Captures. All rights reserved.<br>
+            This website was developed and is hosted by Ash DevOps.
+
+        </p>
+    </footer>
+
+
+    <div class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <a href="#" class="lightbox-prev"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="lightbox-next"><i class="fas fa-chevron-right"></i></a>
+        <div class="lightbox-content">
+            <img src="" alt="Lightbox Image">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const gallery = document.querySelector('.gallery');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+        const lightboxNext = lightbox.querySelector('.lightbox-next');
+        let currentIndex = 0;
+        const images = Array.from(gallery.querySelectorAll('img'));
+
+
+        const slides = document.querySelectorAll('.hero-slide');
+        const prevBtn = document.querySelector('.slide-prev');
+        const nextBtn = document.querySelector('.slide-next');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        // Auto slide every 5 seconds
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        function openLightbox(index) {
+            lightbox.classList.add('active');
+            updateLightboxImage(index);
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+
+        function updateLightboxImage(index) {
+            currentIndex = index;
+            lightboxImg.src = images[index].src;
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage(currentIndex);
+        }
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage(currentIndex);
+        }
+
+        gallery.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG') {
+                const index = images.indexOf(e.target);
+                openLightbox(index);
+            }
+        });
+
+        lightboxClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeLightbox();
+        });
+
+        lightboxNext.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNextImage();
+        });
+
+        lightboxPrev.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPrevImage();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'ArrowRight') showNextImage();
+            if (e.key === 'ArrowLeft') showPrevImage();
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
